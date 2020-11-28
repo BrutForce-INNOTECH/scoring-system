@@ -32,10 +32,11 @@ interface Item {
 
 interface InputItemProps {
   id: string
+  loading: boolean;
   onChange: (id: string, value: string) => any;
 }
 
-const InputItem: React.FC<InputItemProps> = ({id, onChange}) => {
+const InputItem: React.FC<InputItemProps> = ({id, onChange, loading}) => {
 
   const [value, setValue] = useState("");
 
@@ -52,6 +53,7 @@ const InputItem: React.FC<InputItemProps> = ({id, onChange}) => {
         required
         width={"100%"}
         value={value}
+        disabled={loading}
         onChange={handleChange}
         icon={<UserIcon/>}
         placeholder={"URL адрес пользователя соц сети"}
@@ -84,11 +86,12 @@ const Training: React.FC<Props> = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await mutate({input: inputs.map(x => x.value)});
+    const result = await mutate(inputs.map(x => x.value));
     if (result.error) {
       setToast({text: result.error, type: "error"});
     } else {
       setToast({text: "Данные успешно отправлены на проверку. Можно искать по фото!", type: "success"});
+      setInputs([{id: makeId(), value: ""}]);
     }
   }
 
@@ -100,21 +103,21 @@ const Training: React.FC<Props> = (props) => {
           <form onSubmit={handleSubmit}>
             <h4>Добавьте ссылку на соцсети</h4>
             <div className={"actions"}>
-              <Button size={"small"} onClick={changeAddItem}>Добавить ссылку</Button>
+              <Button size={"small"} onClick={changeAddItem} disabled={loading}>Добавить ссылку</Button>
               <Spacer x={0.5}/>
-              {inputs.length > 0 && <Button size={"small"} onClick={changeRemoveItem}>Удалить ссылку</Button>}
+              {inputs.length > 0 && <Button size={"small"} disabled={loading} onClick={changeRemoveItem}>Удалить ссылку</Button>}
               <div className={"grow_action"}/>
               <Button
                 htmlType={"submit"}
                 size={"small"}
-                disabled={inputs.length === 0}
+                disabled={inputs.length === 0 || loading}
                 loading={loading}
                 type={"success"}>
                 Отправить
               </Button>
             </div>
             {inputs.map((input) => (
-              <InputItem id={input.id} key={input.id} onChange={changeValueOnItem}/>
+              <InputItem loading={loading} id={input.id} key={input.id} onChange={changeValueOnItem}/>
             ))}
           </form>
         </Card>
