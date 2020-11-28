@@ -14,7 +14,7 @@ const PageLayout: React.FC<Props> = ({children}) => {
           flex-direction: column;
           flex-wrap: nowrap;
           flex-grow: 1;
-          padding-top: 12px;
+          padding-top: 24px;
         }
       `}</style>
     </div>

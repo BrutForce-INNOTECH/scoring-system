@@ -32,13 +32,10 @@ module.exports = withPlugins(
     sassOptions: {
       includePaths: [path.join(__dirname, 'styles')],
     },
-    async redirects() {
-      return [
-        {
-          source: '/search',
-          destination: '/',
-          permanent: true,
-        },
-      ]
-    }
+    api: {
+      // OR
+      bodyParser: {
+        sizeLimit: '50mb', // Set max body size
+      },
+    },
   });
