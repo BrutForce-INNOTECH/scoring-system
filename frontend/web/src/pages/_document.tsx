@@ -7,7 +7,6 @@ class Document extends NextDocument {
     return (
       <Html dir="ltr" lang="ru">
         <Head>
-          <title>Команда BrutForce INNOTECH HACK</title>
         </Head>
         <body>
         <Main/>

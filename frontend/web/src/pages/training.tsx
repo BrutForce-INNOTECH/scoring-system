@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text} from "@geist-ui/react";
+import PageLayout from "@app/layouts/PageLayout";
 
 interface Props {
 }
@@ -7,9 +8,9 @@ interface Props {
 const Training: React.FC<Props> = (props) => {
 
     return (
-      <>
-        <Text h1>Training</Text>
-      </>
+      <PageLayout>
+        <Text h1>Создание финансового профиля</Text>
+      </PageLayout>
     );
 };
 

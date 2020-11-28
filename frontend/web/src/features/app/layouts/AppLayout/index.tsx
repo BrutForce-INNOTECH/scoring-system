@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Page, useTheme} from "@geist-ui/react";
 import AppHeader from "../../containers/AppHeader";
 import {useRouter} from "next/router";
-import clsx from "clsx";
 import AppPageLoader from "./AppPageLoader";
 
 interface Props {
@@ -51,7 +50,6 @@ const AppLayout: React.FC<Props> = ({children}) => {
       {/** page header and background */}
       <Page.Header className={"page_header"}>
         <AppHeader routerEventPath={routerEventPath}/>
-        <div className={clsx("header_background", "header")}/>
       </Page.Header>
       <Page.Content className={"page_content"}>
         {/** show loading indicator on route changes */}
@@ -63,20 +61,6 @@ const AppLayout: React.FC<Props> = ({children}) => {
       </Page.Content>
 
       <style jsx>{`
-        .header_background {
-          overflow: hidden;
-          position: fixed;
-          opacity: 0.4;
-          left: 0;
-          right: 0;
-          top: 0;
-          height: 78px;
-          width: 100%;
-          z-index: 99;
-        }
-        .header {
-          background-color: ${theme.type === "light" ? "white" : "black"}
-        }
         .content {
           opacity: ${isLoading ? 0 : 1};
           margin-top: -50px;
