@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Card, Input, Spacer, Text} from "@geist-ui/react";
+import {Button, Card, Input, Spacer, Text, useToasts} from "@geist-ui/react";
 import PageLayout from "@app/layouts/PageLayout";
 import {useMutation} from "react-fetching-library";
 import PageContent from "@app/containers/PageContent";
@@ -63,8 +63,7 @@ const InputItem: React.FC<InputItemProps> = ({id, onChange}) => {
 const Training: React.FC<Props> = (props) => {
 
   const [inputs, setInputs] = useState<Item[]>([{id: makeId(), value: ""}]);
-
-
+  const [toasts, setToast] = useToasts();
   const {loading, payload, mutate, error, reset, abort} = useMutation(fetchTrain as any);
 
 
@@ -85,7 +84,12 @@ const Training: React.FC<Props> = (props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await mutate({input: inputs.map(x => x.value)});
+    const result = await mutate({input: inputs.map(x => x.value)});
+    if (result.error) {
+      setToast({text: result.error, type: "error"});
+    } else {
+      setToast({text: "Данные успешно отправлены на проверку. Можно искать по фото!", type: "success"});
+    }
   }
 
   return (
@@ -103,7 +107,7 @@ const Training: React.FC<Props> = (props) => {
               <Button
                 htmlType={"submit"}
                 size={"small"}
-                disabled={!!error}
+                disabled={inputs.length === 0}
                 loading={loading}
                 type={"success"}>
                 Отправить
