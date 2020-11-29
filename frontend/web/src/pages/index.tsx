@@ -74,7 +74,6 @@ const Index: React.FC<Props> = ({children}) => {
       if (searchResult.error) {
         setToast(makeErrorToast("Ошибка при поиске по фото. Попробуйте еще раз."));
       } else {
-        console.log(searchResult.payload);
         const fetchResult = await resultMutate({id: searchResult.payload.data.id});
         handleOpenResultModal(createResultByRaw(fetchResult));
       }
