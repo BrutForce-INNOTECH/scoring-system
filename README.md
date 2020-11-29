@@ -4,7 +4,7 @@
 
 <img src="https://img.shields.io/badge/made%20by-BrutForce-blue.svg" >
 
-<img src="https://img.shields.io/badge/react-17.0.0 -green.svg">
+<img src="https://img.shields.io/badge/react-17.0.0 -pink.svg">
 
 <img src="https://img.shields.io/badge/python-3.6 -red.svg">
 
