@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Button, Card, Spacer, Text, useToasts} from "@geist-ui/react";
 import PageLayout from "@app/layouts/PageLayout";
 import PageContent from "@app/containers/PageContent";
@@ -8,7 +8,7 @@ import fileClient from "@common/api/fileClient";
 import {QueryResponse, useMutation} from "react-fetching-library";
 import TrainingModal from "../features/app/modals/TrainingModal";
 import ResultModal from "../features/app/modals/ResultModal";
-import {createResultByRaw, Result} from "@app/data/result";
+import {createResultByRaw, defaultResult, Result} from "@app/data/result";
 import {makeErrorToast} from "@common/utils";
 
 interface Props {
@@ -46,7 +46,6 @@ const Index: React.FC<Props> = ({children}) => {
   const handleCloseSearchModal = () => setSearchModal(false)
   const handleOpenResultModal = (newResult: Result) => {
     setResult(newResult);
-    console.log(newResult);
     setResultModal(true);
   };
   const handleCloseResultModal = () => {
@@ -97,6 +96,10 @@ const Index: React.FC<Props> = ({children}) => {
     setFile(undefined);
     setResult(undefined);
   }
+
+  // useEffect(() => {
+  //   handleOpenResultModal(defaultResult);
+  // }, [])
 
   return (
     <PageLayout>

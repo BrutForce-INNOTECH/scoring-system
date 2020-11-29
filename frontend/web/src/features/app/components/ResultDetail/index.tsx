@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Button, Col, Spacer, Text} from "@geist-ui/react";
+import {Button, Code, Col, Spacer, Text} from "@geist-ui/react";
 import {fioByResult, labelByResultKey, Result, universityByResult} from "@app/data/result";
 import clsx from "clsx";
 
@@ -38,13 +38,14 @@ const ResultDetail: React.FC<Props> = ({result}) => {
 
   const fio = useMemo(() => fioByResult(result), [result]);
   const university = useMemo(() => universityByResult(result), [result]);
+  const resultJson = useMemo(() => JSON.stringify(result, null, 2), [result]);
 
   return (
     <div className={"r_root"}>
       <div className={"r_header"}>
         <div className={clsx("r_header_row", "r_img_wrapper")}>
           <img alt={"image"} src={result.photo_max_orig} width={240} height={340} className={"r_img"}/>
-          <Spacer y={0.5} />
+          <Spacer y={0.5}/>
           <Button type={"success"}>Подобрать услугу</Button>
         </div>
         <div className={"r_header_row"}>
@@ -54,11 +55,16 @@ const ResultDetail: React.FC<Props> = ({result}) => {
               <Text span>{result.occupation.name}</Text>
               <Spacer y={0.5}/>
             </Col>)}
-          {result.country && <Col><DetailRowItem name={labelByResultKey("country")} value={result.country.title}/></Col>}
-          {result.home_town && <Col><DetailRowItem name={labelByResultKey("home_town")} value={result.home_town}/></Col>}
+          {result.country &&
+          <Col><DetailRowItem name={labelByResultKey("country")} value={result.country.title}/></Col>}
+          {result.home_town &&
+          <Col><DetailRowItem name={labelByResultKey("home_town")} value={result.home_town}/></Col>}
           {university && <Col><DetailRowItem name={labelByResultKey("university")} value={university}/></Col>}
         </div>
       </div>
+      {resultJson && <div className={"r_code"}>
+        <Code style={{wordBreak: "break-word"}}>{resultJson}</Code>
+      </div>}
 
       <style jsx>{`
         .r_root {
@@ -83,6 +89,10 @@ const ResultDetail: React.FC<Props> = ({result}) => {
         }
         .r_img {
           object-fit: cover;
+        }
+        .r_code {
+          max-width: 100%;
+          padding: 8px;
         }
       `}</style>
     </div>
