@@ -74,9 +74,9 @@ const ResultDetail: React.FC<Props> = ({result}) => {
           {university && <Col><DetailRowItem name={labelByPersonKey("university")} value={university}/></Col>}
         </div>
       </div>
-      {/*{resultJson && <div className={"r_code"}>*/}
-      {/*  <Code style={{wordBreak: "break-word"}}>{resultJson}</Code>*/}
-      {/*</div>}*/}
+      {resultJson && <div className={"r_code"}>
+        <Code style={{wordBreak: "break-word"}}>{resultJson}</Code>
+      </div>}
 
       <style jsx>{`
         .r_root {
