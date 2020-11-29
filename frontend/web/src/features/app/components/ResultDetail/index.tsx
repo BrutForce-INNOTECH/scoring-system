@@ -38,7 +38,7 @@ const ResultDetail: React.FC<Props> = ({result}) => {
 
   const data = result.data;
   const fio = useMemo(() => fioByPerson(data), [data]);
-  const age = useMemo(() => result.age ? `${result.age} года` : undefined, [result]);
+  const age = useMemo(() => result.age ? `${result.age}` : undefined, [result]);
   const university = useMemo(() => universityByPerson(data), [data]);
   const resultJson = useMemo(() => JSON.stringify(result, null, 2), [result]);
   const score = useMemo(() => result.age ? `Уровень принятия рисков инвестиций: ${result.score}` : undefined, [result]);
