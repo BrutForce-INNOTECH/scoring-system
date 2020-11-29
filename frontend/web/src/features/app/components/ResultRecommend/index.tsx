@@ -20,11 +20,9 @@ interface ResultAdviceItemProps {
 
 const ResultAdviceItem: React.FC<ResultAdviceItemProps> = ({item}) => {
 
-  console.log(item);
-
   return (
     <Grid xs={6}>
-      <Card shadow style={{width: '100%', height: '100px'}}>
+      <Card style={{width: '100%', height: '100px'}}>
         {item.item}
       </Card>
     </Grid>
