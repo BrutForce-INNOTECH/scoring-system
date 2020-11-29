@@ -57,7 +57,7 @@
 
   <p align="center"><img  src="./readme_assets/4.png" width="30%"></p>
 
-### UI, UX & Design
+### UI/UX Design
 
 Описание и важные детали разработки
 Возможно, картинки или графики.
