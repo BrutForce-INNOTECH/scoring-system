@@ -19,8 +19,17 @@
 <h2 align="center"><a target="_blank" href="https://scoring-system.vercel.app/">You can try it now!</a></h2>
 
 ## Навигация
-
+- [Описание](#описание)
+- [Как пользоваться системой](#как_пользоваться_системой)
+- [О проекте и технологиях](#о_проекте_и_технологиях)
+ - [Архитектура](#архитектура)
+ - [Computer Vision & Machine Learning](#computer_vision_and_machine_learning)
+ - [Frontend & Backend](#frontend_and_backend)
+ - [UI/UX Design](#ui_ux_design)
+ - [Рекомендательная система на основе Скорринга](#рекомендательная_система_на_основе_скорринга)
+ 
 ## Описание
+<a name="описание"></a> 
 
 **Как работает система**
 
@@ -59,6 +68,10 @@
 ## О проекте и технологиях.
 
 ### Архитектура
+
+**Используемые API**:
+[ВК](https://vk.com/dev/methods)
+[Судебное производство от ФССП](https://api-ip.fssprus.ru/)
 
 ### Computer Vision & Machine Learning
 
