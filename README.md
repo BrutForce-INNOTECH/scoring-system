@@ -18,6 +18,8 @@
 
 <h2 align="center"><a target="_blank" href="https://scoring-system.vercel.app/">You can try it now!</a></h2>
 
+## Навигация
+
 ## Описание
 
 **Как работает система**
@@ -55,6 +57,8 @@
 <img src="./readme_asserts/gif2.gif" width="80%"></p>
 
 ## О проекте и технологиях.
+
+### Архитектура
 
 ### Computer Vision & Machine Learning
 
