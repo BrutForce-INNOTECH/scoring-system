@@ -91,11 +91,13 @@ const Index: React.FC<Props> = ({}) => {
         if (+searchResult.payload.data.id === -1) {
           setToast(makeErrorToast("Клиент не найден по фото. Попробуйте другое фото."));
         } else {
+          let newResult = {age: searchResult.payload.data.age} as Result;
           const fetchResult: QueryResponse = await resultMutate({id: searchResult.payload.data.id});
           if (fetchResult.error) {
             setToast(makeErrorToast("Ошибка при получении данных по фото. Попробуйте еще раз."));
           } else {
-            handleOpenResultModal(createResultByRaw(fetchResult.payload));
+            newResult = {...newResult, ...createResultByRaw(fetchResult.payload)}
+            handleOpenResultModal(newResult);
           }
         }
       }

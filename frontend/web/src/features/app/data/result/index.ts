@@ -93,6 +93,8 @@ export interface Person {
 }
 
 export interface Result {
+  age?: number;
+  score?: number;
   data: Person
   BDIP?: any;
   advices?: any[]
@@ -124,8 +126,12 @@ export const labelByPersonKey = (key: keyof Person): string => {
       return "Факультет"
     case "faculty_name":
       return "Название факультета"
+    case "occupation":
+      return "Занятость";
     case "university":
       return "Университет"
+    case "bdate":
+      return "Возраст"
     default:
       return ""
   }
@@ -136,6 +142,7 @@ export const createResultByRaw = (obj: any): Result => {
 }
 
 export const defaultResult = {
+  "age": 0,
   "data": {
     "first_name": "Николай",
     "id": 42061391,
@@ -199,5 +206,5 @@ export const defaultResult = {
       "type": "sibling",
       "id": 194474597
     }]
-  }, "id": 42061391, "BDIP": {"BDIP": []}
+  }, "id": 42061391, "BDIP": {"BDIP": []}, "score": 30
 } as Result;

@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Code, Col, Spacer, Text} from "@geist-ui/react";
+import {Code, Col, Tag, Text} from "@geist-ui/react";
 import {fioByPerson, labelByPersonKey, Result, universityByPerson} from "@app/data/result";
 import clsx from "clsx";
 
@@ -38,8 +38,10 @@ const ResultDetail: React.FC<Props> = ({result}) => {
 
   const data = result.data;
   const fio = useMemo(() => fioByPerson(data), [data]);
+  const age = useMemo(() => result.age ? `${result.age} года` : undefined, [result]);
   const university = useMemo(() => universityByPerson(data), [data]);
   const resultJson = useMemo(() => JSON.stringify(result, null, 2), [result]);
+  const score = useMemo(() => result.age ? `Уровень принятия рисков инвестиций: ${result.score}` : undefined, [result]);
 
   return (
     <div className={"r_root"}>
@@ -52,11 +54,18 @@ const ResultDetail: React.FC<Props> = ({result}) => {
           {/*<Button type={"success"}>Подобрать услугу</Button>*/}
         </div>
         <div className={"r_header_row"}>
-          <Col><Text size={"2rem"} span>{fio}</Text></Col>
+          <Col>
+            <Text size={"1.7rem"} style={{lineHeight: 1}} span>{fio}</Text>
+            <div className={"r_detail"}>
+              {score && <Tag type={"success"}>{score}</Tag>}
+            </div>
+          </Col>
+
+          {age &&
+          <Col><DetailRowItem name={labelByPersonKey("bdate")} value={age}/></Col>}
           {data.occupation && (
             <Col>
-              <Text span>{data.occupation.name}</Text>
-              <Spacer y={0.5}/>
+              <DetailRowItem name={labelByPersonKey("occupation")} value={data.occupation.name}/>
             </Col>)}
           {data.country &&
           <Col><DetailRowItem name={labelByPersonKey("country")} value={data.country.title}/></Col>}
@@ -106,6 +115,10 @@ const ResultDetail: React.FC<Props> = ({result}) => {
           padding: 0 8px;
           max-height: 200px;
           overflow-y: auto;
+        }
+        .r_detail {
+          margin-top: 4px;
+          margin-bottom: 12px;
         }
       `}</style>
     </div>
