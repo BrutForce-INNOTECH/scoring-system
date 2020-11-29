@@ -20,7 +20,8 @@
     "react-dom": "17.0.1",
     "react-dropzone": "^11.2.4",
     "react-fetching-library": "^1.7.4",
-    "react-final-form": "^6.5.2"
+    "react-final-form": "^6.5.2",
+    "react-ga": "^3.3.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

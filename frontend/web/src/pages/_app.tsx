@@ -6,12 +6,19 @@ import AppLayout from "@app/layouts/AppLayout";
 import Head from "next/head";
 import {ClientContextProvider} from 'react-fetching-library';
 import client from "@common/api/client";
+import {useRouter} from "next/router";
+import gtag from "@common/ga/gtag";
 
 interface CustomAppProps extends AppProps {
   cacheItems?: any
 }
 
 const CustomApp: React.FC<CustomAppProps> = ({Component, cacheItems, pageProps}) => {
+
+  const {pathname} = useRouter();
+  useEffect(()=> {
+    gtag.pageView(pathname);
+  }, [pathname])
 
   useEffect(() => {
     if (client.cache && cacheItems) client.cache.setItems(cacheItems);
