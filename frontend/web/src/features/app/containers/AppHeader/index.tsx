@@ -32,7 +32,7 @@ const AppHeader: React.FC<Props> = () => {
         <NextLink href={APP_HOME_ROUTE}>
           <Link style={logoStyle}>
             <img className={"h_logo_img"} src={require("@common/assets/images/logo.svg")} height={32} alt="Logo"/>
-            <Text span size={"1.2rem"} b>BrutForce INNOTECH HACK</Text>
+            {/*<Text span size={"1.2rem"} b>BrutForce INNOTECH HACK</Text>*/}
           </Link>
         </NextLink>
 
