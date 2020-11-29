@@ -16,7 +16,8 @@ const fetchTrain = (formValues: any) => ({
 
 const TrainingModal: React.FC<Props> = ({open, onClose}) => {
 
-  const [value, setValue] = useState("https://vk.com/friomusic");
+  // https://vk.com/friomusic
+  const [value, setValue] = useState("");
   const [count, setCount] = useState("10");
   const [toasts, setToast] = useToasts();
   const {loading, payload, mutate, error, reset, abort} = useMutation(fetchTrain as any);
