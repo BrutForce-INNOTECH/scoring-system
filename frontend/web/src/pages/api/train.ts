@@ -5,13 +5,16 @@ import {apiClient} from "./_constants";
 const COUNT = 10;
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const response = await apiClient.post("/add_data", {
+      count: COUNT,
+      ..._req.body
+    });
 
-  const response = await apiClient.post("/add_data", {
-    urls: _req.body,
-    count: COUNT
-  });
-
-  return res.json({status: response.status});
+    return res.json({status: response.status === 200 ? "ok" : "error"});
+  } catch (ex) {
+    return res.json({error: ex.message});
+  }
 };
 
 export default handler;

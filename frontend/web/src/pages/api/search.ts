@@ -1,17 +1,19 @@
 import {NextApiRequest, NextApiResponse} from 'next';
+import {apiClient} from "./_constants";
 
-const Minio = require('minio');
+const THRESH = 0.65
 
-const minioClient = new Minio.Client({
-  endPoint: 'play.min.io',
-  port: 9000,
-  useSSL: true,
-  accessKey: 'Q3AM3UQ867SPQQA43P2F',
-  secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG'
-});
+const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const response = await apiClient.post("/search", {
+      thresh: THRESH,
+      ..._req.body
+    });
 
-const handler = (_req: NextApiRequest, res: NextApiResponse) => {
-  return res.json({hello: 'world!'});
+    return res.json({data: response.data});
+  } catch (ex) {
+    return res.json({error: ex.message});
+  }
 };
 
 export default handler;

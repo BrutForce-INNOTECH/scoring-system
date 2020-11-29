@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
-import {Button, Card, Input, Spacer, Text, useToasts} from "@geist-ui/react";
-import PageLayout from "@app/layouts/PageLayout";
+import {Button, Input, Spacer, useToasts} from "@geist-ui/react";
 import {useMutation} from "react-fetching-library";
-import PageContent from "@app/containers/PageContent";
-import UserIcon from '@geist-ui/react-icons/user'
+import UserIcon from "@geist-ui/react-icons/user";
 
-
-function makeId(length: number = 16) {
+export function makeId(length: number = 16) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -16,14 +13,14 @@ function makeId(length: number = 16) {
   return result;
 }
 
-interface Props {
-}
-
 const fetchTrain = (formValues: any) => ({
   method: 'POST',
   endpoint: '/train',
   body: formValues,
 });
+
+interface Props {
+}
 
 interface Item {
   id: string;
@@ -62,12 +59,11 @@ const InputItem: React.FC<InputItemProps> = ({id, onChange, loading}) => {
   );
 };
 
-const Training: React.FC<Props> = (props) => {
+const TrainingContainer: React.FC<Props> = (props) => {
 
   const [inputs, setInputs] = useState<Item[]>([{id: makeId(), value: ""}]);
   const [toasts, setToast] = useToasts();
   const {loading, payload, mutate, error, reset, abort} = useMutation(fetchTrain as any);
-
 
   const changeValueOnItem = (id: string, value: string) => {
     const existsItem = inputs.find(x => x.id === id);
@@ -96,45 +92,46 @@ const Training: React.FC<Props> = (props) => {
   }
 
   return (
-    <PageLayout>
-      <Text h1>Создание финансового профиля</Text>
-      <PageContent>
-        <Card shadow>
-          <form onSubmit={handleSubmit}>
-            <h4>Добавьте ссылку на соцсети</h4>
-            <div className={"actions"}>
-              <Button size={"small"} onClick={changeAddItem} disabled={loading}>Добавить ссылку</Button>
-              <Spacer x={0.5}/>
-              {inputs.length > 0 && <Button size={"small"} disabled={loading} onClick={changeRemoveItem}>Удалить ссылку</Button>}
-              <div className={"grow_action"}/>
-              <Button
-                htmlType={"submit"}
-                size={"small"}
-                disabled={inputs.length === 0 || loading}
-                loading={loading}
-                type={"success"}>
-                Отправить
-              </Button>
-            </div>
-            {inputs.map((input) => (
-              <InputItem loading={loading} id={input.id} key={input.id} onChange={changeValueOnItem}/>
-            ))}
-          </form>
-        </Card>
-      </PageContent>
+    <div className={"t_root"}>
+      <form onSubmit={handleSubmit}>
+        <h4>Добавьте ссылку на соцсети</h4>
+        <div className={"actions"}>
+          <Button size={"small"} onClick={changeAddItem} disabled={loading}>Добавить ссылку</Button>
+          <Spacer x={0.5}/>
+          {inputs.length > 0 &&
+          <Button size={"small"} disabled={loading} onClick={changeRemoveItem}>Удалить ссылку</Button>}
+          <div className={"grow_action"}/>
+          <Button
+            htmlType={"submit"}
+            size={"small"}
+            disabled={inputs.length === 0 || loading}
+            loading={loading}
+            type={"success"}>
+            Отправить
+          </Button>
+        </div>
+        {inputs.map((input) => (
+          <InputItem loading={loading} id={input.id} key={input.id} onChange={changeValueOnItem}/>
+        ))}
+      </form>
 
       <style jsx>{`
-        .actions {
+        .t_root {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+        }
+        .t_actions {
           display: flex;
           flex-direction: row;
           align-items: center;
-        } 
+        }
         .grow_action {
           flex-grow: 1;
         }
       `}</style>
-    </PageLayout>
+    </div>
   );
 };
 
-export default Training;
+export default TrainingContainer;

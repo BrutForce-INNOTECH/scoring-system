@@ -4,6 +4,7 @@ import PageLayout from "@app/layouts/PageLayout";
 import PageContent from "@app/containers/PageContent";
 import Dropzone from 'react-dropzone'
 import clsx from "clsx"
+import fileClient from "@common/api/fileClient";
 import {useMutation} from "react-fetching-library";
 
 interface Props {
@@ -15,28 +16,46 @@ const fetchSearch = (formValues: any) => ({
   body: formValues,
 });
 
+interface FileItem {
+  preview: string;
+  blob: File
+}
+
 const Search: React.FC<Props> = ({children}) => {
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<FileItem>();
+  const [loading, setLoading] = useState(false);
   const [toasts, setToast] = useToasts();
-  const {loading, payload, mutate, error, reset, abort} = useMutation(fetchSearch as any);
+  const {payload, mutate, error} = useMutation(fetchSearch as any);
 
   const handleDrop = useCallback(acceptedFiles => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       const acceptedFile = acceptedFiles[0];
-      setFile(Object.assign(acceptedFile, {
-        preview: URL.createObjectURL(acceptedFile)
-      }));
+      setFile({blob: acceptedFile, preview: URL.createObjectURL(acceptedFile)});
     }
   }, [])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await mutate(file);
-    if (result.error) {
-      setToast({text: result.error, type: "error"});
-    } else {
-      // setToast({text: "Данные успешно отправлены на проверку!", type: "success"});
+    if (!file) return;
+    try {
+      setLoading(true);
+
+      const uploadResult = await fileClient.uploadFile(file.blob);
+      const result = await mutate({
+        url: uploadResult
+      });
+      if (result.error) {
+        setToast({text: "Ошибка при поиске по фото. Попробуйте еще раз.", type: "error"});
+      } else {
+        setToast({text: result.payload, type: "success"});
+        setFile(undefined);
+      }
+    } catch (err) {
+      console.log(err);
+      setToast({text: err.message, type: "error"});
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -55,7 +74,7 @@ const Search: React.FC<Props> = ({children}) => {
                 <div {...getRootProps()} className={clsx("dropzone", isDragActive && "dropzone_active")}>
                   <input {...getInputProps()} />
                   {!file && <p>Перетащите фото или загрузите с компьютера</p>}
-                  {!!file && <img alt={"thumb"} className={"thumb"} src={(file as any).preview!}/>}
+                  {!!file && <img alt={"thumb"} className={"thumb"} src={file.preview!}/>}
                 </div>
               )}
             </Dropzone>

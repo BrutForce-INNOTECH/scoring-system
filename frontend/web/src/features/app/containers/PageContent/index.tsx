@@ -12,7 +12,7 @@ const PageContent: React.FC<Props> = ({children}) => {
           display: flex;
           flex-direction: column;
           flex-grow: 1;
-          padding-top: 12px;
+          padding-top: 0;
           padding-bottom: 16px;
          }
         `}</style>

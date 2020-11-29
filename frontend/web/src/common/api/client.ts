@@ -1,12 +1,11 @@
 import {createClient} from 'react-fetching-library';
 import {cache} from './cache';
-import {requestHostInterceptor} from "@common/api/requestHostInterceptor";
-
-const API_BASE_URL = process.env["API_URL"] || '/api'
+import {buildAxiosFetch} from "@common/api/buildAxiosFetch";
+import axiosClient from "@common/api/axiosClient";
 
 const client = createClient({
   cacheProvider: cache as any,
-  requestInterceptors: [requestHostInterceptor(API_BASE_URL)]
+  fetch: buildAxiosFetch(axiosClient),
 });
 
 export default client;
