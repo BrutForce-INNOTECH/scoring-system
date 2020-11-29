@@ -92,8 +92,15 @@
 <a name="computer_vision_and_machine_learning"></a> 
 ### Computer Vision & Machine Learning
 
-Описание и важные вырезки кода технологии.
-Возможно, картинки или графики.
+**Технонологии**:
+-[OpenCV](https://opencv.org/)
+-[MXNet](https://mxnet.apache.org/)
+
+**Нейронные сети** :
+
+-Face Detecton - [RetinaFace](https://arxiv.org/abs/1905.00641)
+-Face Alignment - [DenseUNet](https://arxiv.org/abs/1709.07330)
+-Face Recognition + Age - LResNet100E-IR
 
 <a name="frontend_and_backend"></a> 
 ### Frontend & Backend
@@ -123,8 +130,8 @@
 <a name="планы_на_будущее"></a> 
 ## Планы на будущее
 
-- Добавить 1
-- Добавить 2
+- Добавление внешних API(yandex,
+- Возможное добавление обработки фотографий с названиями на русском языке
 - Добавить 3
 
 <p align="right" ><img src="./readme_asserts/logo_comm.png" width="15%"></p>
