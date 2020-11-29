@@ -31,7 +31,7 @@
 Система распознает не только клиента, но и его примерный возраст, чтобы максимально точно определить его примерные потребности в банковской сфере услуг.
 
 
-**Над созданием проекта работают [Виктор](https://github.com/victor30608), [Алексей](https://github.com/kvandake), [Анна](https://github.com/elladiell), [Сергей](https://github.com/AadumKhor), [Кристина](https://github.com/AadumKhor)** .
+**Над созданием проекта работают [Виктор](https://github.com/victor30608), [Алексей](https://github.com/kvandake), [Анна](https://github.com/elladiell), [Сергей](), [Кристина]()** .
 
 ## Как пользоваться системой
 
