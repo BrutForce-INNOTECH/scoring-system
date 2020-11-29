@@ -1,4 +1,5 @@
 import axios, {AxiosInstance} from "axios";
+const cyrillicToTranslitJs = require("cyrillic-to-translit-js")
 
 const FILE_TOKEN = "45e9efce34a84a478f298a80b00b6dae";
 const FILE_BASE_URL = 'https://brutforce.kvandake.ru'
@@ -21,7 +22,8 @@ class FileClient {
 
   async uploadFile(file: File): Promise<string> {
     const formData = new FormData();
-    formData.append('file', file, file.name);
+    const fileName = cyrillicToTranslitJs().transform(file.name, "_");
+    formData.append('file', file, fileName);
 
     const result = await this.fileClient.post<UploadResult>("/files/upload", formData, {
       params: {
