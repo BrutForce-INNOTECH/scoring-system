@@ -14,7 +14,7 @@
 
 </p>
 
-<img src="./readme_asserts/%D0%BB%D0%BE%D0%B3%D0%BE.png" width="50%">
+<p align="center"><img  src="./readme_assets/лого.png" width="30%"></p>
 
 <h2 align="center"><a  href="https://scoring-system-git-frontend.brutforce.vercel.app/">You can try it now!</a></h2>
 
