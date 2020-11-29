@@ -15,7 +15,7 @@ const ResultContainer: React.FC<Props> = ({result}) => {
       <div className={"r_tabs_container"}>
         <Tabs initialValue="1">
           <Tabs.Item label="Финансовая информация" value="1"><ResultDetail result={result}/></Tabs.Item>
-          {result.advices.length > 0 &&
+          {result.advices && result.advices.length > 0 &&
           <Tabs.Item label="Рекомендуемые услуги" value="2"><ResultAdvice result={result}/></Tabs.Item>}
         </Tabs>
       </div>

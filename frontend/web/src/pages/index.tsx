@@ -46,6 +46,7 @@ const Index: React.FC<Props> = ({children}) => {
   const handleCloseSearchModal = () => setSearchModal(false)
   const handleOpenResultModal = (newResult: Result) => {
     setResult(newResult);
+    console.log(newResult);
     setResultModal(true);
   };
   const handleCloseResultModal = () => {
@@ -74,8 +75,12 @@ const Index: React.FC<Props> = ({children}) => {
       if (searchResult.error) {
         setToast(makeErrorToast("Ошибка при поиске по фото. Попробуйте еще раз."));
       } else {
-        const fetchResult = await resultMutate({id: searchResult.payload.data.id});
-        handleOpenResultModal(createResultByRaw(fetchResult));
+        const fetchResult: QueryResponse = await resultMutate({id: searchResult.payload.data.id});
+        if (fetchResult.error) {
+          setToast(makeErrorToast("Ошибка при получении данных по фото. Попробуйте еще раз."));
+        } else {
+          handleOpenResultModal(createResultByRaw(fetchResult.payload.data));
+        }
       }
     } catch (err) {
       setToast(makeErrorToast(err.message));

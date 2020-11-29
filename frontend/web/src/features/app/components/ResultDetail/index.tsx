@@ -1,6 +1,6 @@
-import React from 'react';
-import {Col, Spacer, Text} from "@geist-ui/react";
-import {labelByResult, Result} from "@app/data/result";
+import React, {useMemo} from 'react';
+import {Button, Col, Spacer, Text} from "@geist-ui/react";
+import {fioByResult, labelByResultKey, Result, universityByResult} from "@app/data/result";
 import clsx from "clsx";
 
 interface Props {
@@ -36,24 +36,27 @@ const DetailRowItem: React.FC<DetailRowItemProps> = ({name, value}) => {
 
 const ResultDetail: React.FC<Props> = ({result}) => {
 
+  const fio = useMemo(() => fioByResult(result), [result]);
+  const university = useMemo(() => universityByResult(result), [result]);
+
   return (
     <div className={"r_root"}>
       <div className={"r_header"}>
         <div className={clsx("r_header_row", "r_img_wrapper")}>
-          <img alt={"image"} src={result.image} width={240} height={340} className={"r_img"}/>
+          <img alt={"image"} src={result.photo_max_orig} width={240} height={340} className={"r_img"}/>
+          <Spacer y={0.5} />
+          <Button type={"success"}>Подобрать услугу</Button>
         </div>
         <div className={"r_header_row"}>
-          <Col><Text size={"2rem"} span>{result.fio}</Text></Col>
-          {result?.position && (
+          <Col><Text size={"2rem"} span>{fio}</Text></Col>
+          {result.occupation && (
             <Col>
-              <Text span>{result?.position}</Text>
+              <Text span>{result.occupation.name}</Text>
               <Spacer y={0.5}/>
             </Col>)}
-          <Col><DetailRowItem name={labelByResult("vk")} value={result.vk}/></Col>
-          <Col><DetailRowItem name={labelByResult("fb")} value={result.fb}/></Col>
-          <Col><DetailRowItem name={labelByResult("inn")} value={result.inn}/></Col>
-          <Col><DetailRowItem name={labelByResult("fssp")} value={result.fssp}/></Col>
-          <Col><DetailRowItem name={labelByResult("bankrot")} value={result.bankrot}/></Col>
+          {result.country && <Col><DetailRowItem name={labelByResultKey("country")} value={result.country.title}/></Col>}
+          {result.home_town && <Col><DetailRowItem name={labelByResultKey("home_town")} value={result.home_town}/></Col>}
+          {university && <Col><DetailRowItem name={labelByResultKey("university")} value={university}/></Col>}
         </div>
       </div>
 
@@ -76,8 +79,6 @@ const ResultDetail: React.FC<Props> = ({result}) => {
           flex-wrap: nowrap;
         }
         .r_img_wrapper {
-          border-radius: 8px;
-          overflow: hidden;
           margin-right: 16px;
         }
         .r_img {

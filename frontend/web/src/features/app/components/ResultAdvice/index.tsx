@@ -25,7 +25,7 @@ const ResultAdvice: React.FC<Props> = ({result}) => {
   return (
     <div className={"r_root"}>
       <Grid.Container gap={2} justify="center">
-        {result.advices.map(advice => (
+        {result.advices && result.advices.map(advice => (
           <ResultAdviceItem item={advice} key={advice.id}/>
         ))}
       </Grid.Container>
