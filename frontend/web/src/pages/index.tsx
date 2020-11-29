@@ -13,7 +13,7 @@ import {makeErrorToast} from "@common/utils";
 import SettingsIcon from '@geist-ui/react-icons/settings'
 import SettingsModal from "../features/app/modals/SettingsModal";
 import useLocalStorage from "@common/hooks/useLocalStorage";
-import {SETTINGS_THRESH_KEY, Settings} from "@app/data/settings";
+import {Settings, SETTINGS_THRESH_KEY} from "@app/data/settings";
 
 
 interface Props {
@@ -59,6 +59,8 @@ const Index: React.FC<Props> = ({}) => {
   const handleOpenResultModal = (newResult: Result) => {
     setResult(newResult);
     setResultModal(true);
+    console.debug(newResult);
+    console.debug(JSON.stringify(newResult));
   };
   const handleCloseResultModal = () => {
     setResultModal(false);
@@ -79,7 +81,6 @@ const Index: React.FC<Props> = ({}) => {
       setResult(undefined);
 
       const uploadResult = await fileClient.uploadFile(file.blob);
-      console.log(settings);
       const searchResult: QueryResponse = await searchMutate({
         thresh: settings.thresh,
         url: uploadResult,
@@ -94,7 +95,7 @@ const Index: React.FC<Props> = ({}) => {
           if (fetchResult.error) {
             setToast(makeErrorToast("Ошибка при получении данных по фото. Попробуйте еще раз."));
           } else {
-            handleOpenResultModal(createResultByRaw(fetchResult.payload.data));
+            handleOpenResultModal(createResultByRaw(fetchResult.payload));
           }
         }
       }
@@ -117,7 +118,6 @@ const Index: React.FC<Props> = ({}) => {
 
   useEffect(() => {
     if (localSettings) {
-      console.log(localSettings);
       setSettings(localSettings)
     } else {
       setLocalSettings(settings)

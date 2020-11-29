@@ -1,5 +1,5 @@
 import {Card, Grid} from "@geist-ui/react";
-import {Result, AdviceItem} from "@app/data/result";
+import {Person, AdviceItem, Result} from "@app/data/result";
 
 interface Props {
   result: Result;

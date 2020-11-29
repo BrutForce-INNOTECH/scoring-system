@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {fioByResult, Result} from "@app/data/result";
+import {fioByPerson, Person, Result} from "@app/data/result";
 import {Modal, Text} from "@geist-ui/react";
 import ResultContainer from "@app/containers/ResultContainer";
 
@@ -11,7 +11,7 @@ interface Props {
 
 const ResultModal: React.FC<Props> = ({open, result, onClose, children}) => {
 
-  const fio = useMemo(() => result ? fioByResult(result) : '', [result]);
+  const fio = useMemo(() => result ? fioByPerson(result.data) : '', [result]);
 
   return (
     <Modal width={"48rem"} open={open} onClose={onClose}>

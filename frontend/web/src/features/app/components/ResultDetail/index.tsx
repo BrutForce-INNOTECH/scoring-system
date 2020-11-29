@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {Code, Col, Spacer, Text} from "@geist-ui/react";
-import {fioByResult, labelByResultKey, Result, universityByResult} from "@app/data/result";
+import {fioByPerson, labelByPersonKey, Result, universityByPerson} from "@app/data/result";
 import clsx from "clsx";
 
 interface Props {
@@ -36,8 +36,9 @@ const DetailRowItem: React.FC<DetailRowItemProps> = ({name, value}) => {
 
 const ResultDetail: React.FC<Props> = ({result}) => {
 
-  const fio = useMemo(() => fioByResult(result), [result]);
-  const university = useMemo(() => universityByResult(result), [result]);
+  const data = result.data;
+  const fio = useMemo(() => fioByPerson(data), [data]);
+  const university = useMemo(() => universityByPerson(data), [data]);
   const resultJson = useMemo(() => JSON.stringify(result, null, 2), [result]);
 
   return (
@@ -45,23 +46,23 @@ const ResultDetail: React.FC<Props> = ({result}) => {
       <div className={"r_header"}>
         <div className={clsx("r_header_row")}>
           <div className={"r_img_wrapper"}>
-            <img alt={"image"} src={result.photo_max_orig} width={240} height={340} className={"r_img"}/>
+            <img alt={"image"} src={data.photo_max_orig} width={240} height={340} className={"r_img"}/>
           </div>
           {/*<Spacer y={0.5}/>*/}
           {/*<Button type={"success"}>Подобрать услугу</Button>*/}
         </div>
         <div className={"r_header_row"}>
           <Col><Text size={"2rem"} span>{fio}</Text></Col>
-          {result.occupation && (
+          {data.occupation && (
             <Col>
-              <Text span>{result.occupation.name}</Text>
+              <Text span>{data.occupation.name}</Text>
               <Spacer y={0.5}/>
             </Col>)}
-          {result.country &&
-          <Col><DetailRowItem name={labelByResultKey("country")} value={result.country.title}/></Col>}
-          {result.home_town &&
-          <Col><DetailRowItem name={labelByResultKey("home_town")} value={result.home_town}/></Col>}
-          {university && <Col><DetailRowItem name={labelByResultKey("university")} value={university}/></Col>}
+          {data.country &&
+          <Col><DetailRowItem name={labelByPersonKey("country")} value={data.country.title}/></Col>}
+          {data.home_town &&
+          <Col><DetailRowItem name={labelByPersonKey("home_town")} value={data.home_town}/></Col>}
+          {university && <Col><DetailRowItem name={labelByPersonKey("university")} value={university}/></Col>}
         </div>
       </div>
       {resultJson && <div className={"r_code"}>
