@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Modal, Textarea, useToasts} from "@geist-ui/react";
+import {Input, Modal, Spacer, Textarea, useToasts} from "@geist-ui/react";
 import {useMutation} from "react-fetching-library";
 
 interface Props {
@@ -16,16 +16,27 @@ const fetchTrain = (formValues: any) => ({
 const TrainingModal: React.FC<Props> = ({open, onClose}) => {
 
   const [value, setValue] = useState("https://vk.com/durov");
+  const [count, setCount] = useState("10");
   const [toasts, setToast] = useToasts();
   const {loading, payload, mutate, error, reset, abort} = useMutation(fetchTrain as any);
 
   const changeValue = (event: any) => {
     setValue(event.target.value);
   }
+  const changeCount = (event: any) => {
+    const newCount = event.target.value.replace(/\D/g, '');
+    setCount(newCount);
+  }
 
   const handleSubmit = async (e: any) => {
+    const _count = +count;
+    if (_count < 3 || _count > 20) {
+      setToast({text: "Кол-во вхождений должно быть от 3 до 20.", type: "error"});
+      return;
+    }
+
     const inputs = value.split("\n").filter(x => x);
-    const result = await mutate({urls: inputs});
+    const result = await mutate({urls: inputs, count: _count});
     if (result.error) {
       setToast({text: "Ошибка при загрузке данных. Попробуйте еще раз.", type: "error"});
     } else {
@@ -36,8 +47,9 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
   }
 
   return (
-    <Modal open={open} disableBackdropClick>
-      <Modal.Title>Добавьте ссылку на соцсети</Modal.Title>
+    <Modal open={open} disableBackdropClick width="35rem">
+      <Modal.Title>Добавьте ссылки на соцсети VK или Facebook</Modal.Title>
+      <Modal.Subtitle>Для добавления новой строки нажмите Enter</Modal.Subtitle>
       <Modal.Content>
         <Textarea
           width={"100%"}
@@ -45,7 +57,19 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
           disabled={loading}
           value={value}
           onChange={changeValue}
-          placeholder="Для примера: https://vk.com/durov"
+          status="success"
+          placeholder="Ссылка на профиль в соц сети. Например, https://vk.com/durov"
+        />
+        <Spacer y={0.5}/>
+        <Input
+          label="Кол-во вхождений"
+          min={3}
+          max={20}
+          disabled={loading}
+          value={count}
+          width={"100%"}
+          type={"numeric"}
+          onChange={changeCount}
         />
       </Modal.Content>
       <Modal.Action passive disabled={loading} onClick={onClose}>Закрыть</Modal.Action>
@@ -56,7 +80,7 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
         disabled={!value || loading}
         loading={loading}
         type={"success"}>
-        Отправить
+        Отправить профили
       </Modal.Action>
 
       <style jsx>{`
