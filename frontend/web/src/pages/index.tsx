@@ -91,7 +91,7 @@ const Index: React.FC<Props> = ({children}) => {
                 onClick={handleOpenModal}
                 disabled={loading}
                 type={"default"}>
-                Настроить поиск
+                Добавить ссылки
               </Button>
               <div className={"grow_action"}/>
               {!!file && (
