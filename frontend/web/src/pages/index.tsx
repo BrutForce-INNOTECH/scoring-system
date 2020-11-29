@@ -72,7 +72,7 @@ const Index: React.FC<Props> = ({children}) => {
 
   return (
     <PageLayout>
-      <Text h1 size={"2rem"}>Определить по фото клиента</Text>
+      <Text h1 size={"1.6rem"} type={"secondary"}>Определить финансовый профиль по фото</Text>
       <PageContent>
         <Card shadow>
           <form onSubmit={handleSubmit}>
