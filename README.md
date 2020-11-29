@@ -1,4 +1,4 @@
-<h1 align="center">Bruthal Scoring System</h1>
+<h1 align="center">BankSpy</h1>
 
 <p align="center">  
 
@@ -14,7 +14,7 @@
 
 </p>
 
-<p align="center"><img  src="./readme_asserts/лого.png" width="30%"></p>
+<p align="center"><img  src="./readme_asserts/лого.png" width="70%"></p>
 
 <h2 align="center"><a  href="https://scoring-system-git-frontend.brutforce.vercel.app/">You can try it now!</a></h2>
 
