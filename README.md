@@ -8,9 +8,11 @@
 
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 
-<img src="https://img.shields.io/github/stars/BrutForce-INNOTECH/наш.svg?style=flat">
+<img src="https://img.shields.io/github/stars/BrutForce-INNOTECH/scoring-system.svg?style=flat">
 
-<img src="https://img.shields.io/github/issues/BrutForce-INNOTECH/наш.svg">
+<img src="https://img.shields.io/github/languages/top/BrutForce-INNOTECH/scoring-system.svg">
+
+<img src="https://img.shields.io/github/issues/BrutForce-INNOTECH/scoring-system.svg">
 
 </p>
 
