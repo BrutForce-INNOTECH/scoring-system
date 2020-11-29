@@ -88,12 +88,14 @@
 
 <a name="frontend_and_backend"></a> 
 ### Frontend & Backend
+*Frontend*
+- [Typescript](https://www.typescriptlang.org/)
+- [Next.JS](https://nextjs.org/)
+- [React, React hooks](https://reactjs.org/)
 
-
-Описание и важные вырезки кода технологии.
-Возможно, картинки или графики.
-
-  <p align="center"><img  src="./readme_assets/4.png" width="30%"></p>
+*Backend*
+- [SSR](https://vuejs.org/v2/guide/ssr.html)
+- [Nginx](https://nginx.org/)
 
 <a name="ux_ui_design"></a> 
 ### UI/UX Design
