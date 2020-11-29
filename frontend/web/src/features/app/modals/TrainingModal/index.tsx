@@ -50,7 +50,7 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
 
   return (
     <Modal open={open} disableBackdropClick width="35rem">
-      <Modal.Title>Добавьте ссылки на соцсети VK или Facebook</Modal.Title>
+      <Modal.Title>Добавить ссылки на VK и Facebook</Modal.Title>
       <Modal.Subtitle>Для добавления новой строки нажмите Enter</Modal.Subtitle>
       <Modal.Content>
         <Textarea
