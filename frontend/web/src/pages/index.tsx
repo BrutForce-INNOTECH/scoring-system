@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Button, Card, Spacer, Text, useToasts} from "@geist-ui/react";
 import PageLayout from "@app/layouts/PageLayout";
 import PageContent from "@app/containers/PageContent";
@@ -7,6 +7,8 @@ import clsx from "clsx"
 import fileClient from "@common/api/fileClient";
 import {useMutation} from "react-fetching-library";
 import TrainingModal from "../features/app/modals/TrainingModal";
+import ResultModal from "../features/app/modals/ResultModal";
+import {defaultResult} from "@app/data/result";
 
 interface Props {
 }
@@ -27,13 +29,14 @@ const Index: React.FC<Props> = ({children}) => {
   const [file, setFile] = useState<FileItem>();
   const [loading, setLoading] = useState(false);
   const [toasts, setToast] = useToasts();
-  const [modal, setModal] = useState(false);
+  const [searchModal, setSearchModal] = useState(false);
+  const [resultModal, setResultModal] = useState(false);
   const {payload, mutate, error} = useMutation(fetchSearch as any);
 
-  const handleOpenModal = () => setModal(true)
-  const handleCloseModal = () => {
-    setModal(false)
-  }
+  const handleOpenSearchModal = () => setSearchModal(true)
+  const handleCloseSearchModal = () => setSearchModal(false)
+  const handleOpenResultModal = () => setResultModal(true);
+  const handleCloseResultModal = () => setResultModal(false)
 
   const handleDrop = useCallback(acceptedFiles => {
     if (acceptedFiles && acceptedFiles.length > 0) {
@@ -70,6 +73,10 @@ const Index: React.FC<Props> = ({children}) => {
     setFile(undefined);
   }
 
+  // useEffect(()=> {
+  //   handleOpenResultModal();
+  // }, [])
+
   return (
     <PageLayout>
       <Text h1 size={"1.6rem"} type={"secondary"}>Определить финансовый профиль по фото</Text>
@@ -88,7 +95,7 @@ const Index: React.FC<Props> = ({children}) => {
             <Spacer y={0.75}/>
             <div className={"actions"}>
               <Button
-                onClick={handleOpenModal}
+                onClick={handleOpenSearchModal}
                 disabled={loading}
                 type={"default"}>
                 Добавить ссылки
@@ -97,7 +104,7 @@ const Index: React.FC<Props> = ({children}) => {
               {!!file && (
                 <>
                   <Spacer x={0.5}/>
-                  <Button type={"error-light"} onClick={handleRemoveFile}>Удалить файл</Button>
+                  <Button type={"error-light"} disabled={loading} onClick={handleRemoveFile}>Удалить фото</Button>
                   <Spacer x={0.5}/>
                 </>
               )}
@@ -106,7 +113,7 @@ const Index: React.FC<Props> = ({children}) => {
                 htmlType={"submit"}
                 disabled={!file}
                 type={"success"}>
-                Отправить
+                Определить
               </Button>
             </div>
           </form>
@@ -114,7 +121,8 @@ const Index: React.FC<Props> = ({children}) => {
         </Card>
       </PageContent>
 
-      <TrainingModal open={modal} onClose={handleCloseModal}/>
+      <TrainingModal open={searchModal} onClose={handleCloseSearchModal}/>
+      <ResultModal open={resultModal} onClose={handleCloseResultModal} result={defaultResult}/>
 
       <style jsx>{`
         .dropzone {
