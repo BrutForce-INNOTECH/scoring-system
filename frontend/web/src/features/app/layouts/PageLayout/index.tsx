@@ -6,10 +6,10 @@ interface Props {
 const PageLayout: React.FC<Props> = ({children}) => {
 
   return (
-    <div className={"root"}>
+    <div className={"p_root"}>
       {children}
       <style jsx>{`
-        .root {
+        .p_root {
           display: flex;
           flex-direction: column;
           flex-wrap: nowrap;

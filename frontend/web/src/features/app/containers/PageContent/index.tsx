@@ -5,10 +5,10 @@ interface Props {
 const PageContent: React.FC<Props> = ({children}) => {
 
   return (
-    <div className={"root"}>
+    <div className={"pc_root"}>
       {children}
       <style jsx>{`
-         .root {
+         .pc_root {
           display: flex;
           flex-direction: column;
           flex-grow: 1;
