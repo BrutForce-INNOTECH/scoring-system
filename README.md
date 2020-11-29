@@ -93,14 +93,14 @@
 ### Computer Vision & Machine Learning
 
 **Технонологии**:
--[OpenCV](https://opencv.org/)
--[MXNet](https://mxnet.apache.org/)
+- [OpenCV](https://opencv.org/)
+- [MXNet](https://mxnet.apache.org/)
 
 **Нейронные сети** :
 
--Face Detecton - [RetinaFace](https://arxiv.org/abs/1905.00641)
--Face Alignment - [DenseUNet](https://arxiv.org/abs/1709.07330)
--Face Recognition + Age - LResNet100E-IR
+- Face Detecton - [RetinaFace](https://arxiv.org/abs/1905.00641)
+- Face Alignment - [DenseUNet](https://arxiv.org/abs/1709.07330)
+- Face Recognition + Age - LResNet100E-IR
 
 <a name="frontend_and_backend"></a> 
 ### Frontend & Backend
