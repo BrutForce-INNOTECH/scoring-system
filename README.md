@@ -4,13 +4,17 @@
 
 <img src="https://img.shields.io/badge/made%20by-BrutForce-blue.svg" >
 
-<img src="https://img.shields.io/badge/react-version-green.svg">
+<img src="https://img.shields.io/badge/react-17.0.0 -pink.svg">
+
+<img src="https://img.shields.io/badge/python-3.6 -red.svg">
 
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 
-<img src="https://img.shields.io/github/stars/BrutForce-INNOTECH/наш.svg?style=flat">
+<img src="https://img.shields.io/github/stars/BrutForce-INNOTECH/scoring-system.svg?style=flat">
 
-<img src="https://img.shields.io/github/issues/BrutForce-INNOTECH/наш.svg">
+<img src="https://img.shields.io/github/languages/top/BrutForce-INNOTECH/scoring-system.svg">
+
+<img src="https://img.shields.io/github/issues/BrutForce-INNOTECH/scoring-system.svg">
 
 </p>
 
