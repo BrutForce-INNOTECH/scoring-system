@@ -21,6 +21,13 @@ const ResultModal: React.FC<Props> = ({open, result, onClose, children}) => {
           <ResultContainer result={result}/>
         </div>}
       </Modal.Content>
+      <Modal.Action passive onClick={onClose}>Закрыть</Modal.Action>
+      <Modal.Action
+        htmlType={"button"}
+        size={"small"}
+        type={"success"}>
+        Подобрать услугу
+      </Modal.Action>
       <style jsx>{`
       `}</style>
     </Modal>

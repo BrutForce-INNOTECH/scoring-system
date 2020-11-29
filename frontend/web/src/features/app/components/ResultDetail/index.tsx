@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Button, Code, Col, Spacer, Text} from "@geist-ui/react";
+import {Code, Col, Spacer, Text} from "@geist-ui/react";
 import {fioByResult, labelByResultKey, Result, universityByResult} from "@app/data/result";
 import clsx from "clsx";
 
@@ -43,10 +43,12 @@ const ResultDetail: React.FC<Props> = ({result}) => {
   return (
     <div className={"r_root"}>
       <div className={"r_header"}>
-        <div className={clsx("r_header_row", "r_img_wrapper")}>
-          <img alt={"image"} src={result.photo_max_orig} width={240} height={340} className={"r_img"}/>
-          <Spacer y={0.5}/>
-          <Button type={"success"}>Подобрать услугу</Button>
+        <div className={clsx("r_header_row")}>
+          <div className={"r_img_wrapper"}>
+            <img alt={"image"} src={result.photo_max_orig} width={240} height={340} className={"r_img"}/>
+          </div>
+          {/*<Spacer y={0.5}/>*/}
+          {/*<Button type={"success"}>Подобрать услугу</Button>*/}
         </div>
         <div className={"r_header_row"}>
           <Col><Text size={"2rem"} span>{fio}</Text></Col>
@@ -86,13 +88,23 @@ const ResultDetail: React.FC<Props> = ({result}) => {
         }
         .r_img_wrapper {
           margin-right: 16px;
+          display: flex;
+          flex-direction: column;
+        }
+        .r_img_wrapper {
+          margin-right: 16px;
+          overflow: hidden;
+          border-radius: 8px;
         }
         .r_img {
           object-fit: cover;
         }
         .r_code {
           max-width: 100%;
-          padding: 8px;
+          margin-top: 16px;
+          padding: 0 8px;
+          max-height: 200px;
+          overflow-y: auto;
         }
       `}</style>
     </div>
