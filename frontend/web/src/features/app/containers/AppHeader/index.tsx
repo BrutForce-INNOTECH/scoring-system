@@ -34,7 +34,7 @@ const AppHeader: React.FC<Props> = () => {
 
         <div className={"h_action_grow"} />
         <Button onClick={handleGithub} type={"default"} icon={<GithubIcon/>} auto size="small">
-          Github
+          GitHub
         </Button>
       </div>
 

@@ -8,7 +8,7 @@ import fileClient from "@common/api/fileClient";
 import {useMutation} from "react-fetching-library";
 import TrainingModal from "../features/app/modals/TrainingModal";
 import ResultModal from "../features/app/modals/ResultModal";
-import {defaultResult} from "@app/data/result";
+import {createResultByRaw, Result} from "@app/data/result";
 
 interface Props {
 }
@@ -26,6 +26,7 @@ interface FileItem {
 
 const Index: React.FC<Props> = ({children}) => {
 
+  const [result, setResult] = useState<Result>();
   const [file, setFile] = useState<FileItem>();
   const [loading, setLoading] = useState(false);
   const [toasts, setToast] = useToasts();
@@ -36,7 +37,10 @@ const Index: React.FC<Props> = ({children}) => {
   const handleOpenSearchModal = () => setSearchModal(true)
   const handleCloseSearchModal = () => setSearchModal(false)
   const handleOpenResultModal = () => setResultModal(true);
-  const handleCloseResultModal = () => setResultModal(false)
+  const handleCloseResultModal = () => {
+    setResultModal(false);
+    setResult(undefined);
+  }
 
   const handleDrop = useCallback(acceptedFiles => {
     if (acceptedFiles && acceptedFiles.length > 0) {
@@ -53,13 +57,15 @@ const Index: React.FC<Props> = ({children}) => {
 
       const uploadResult = await fileClient.uploadFile(file.blob);
       const result = await mutate({
-        url: uploadResult
+        thresh: 0.65,
+        url: uploadResult,
       });
       if (result.error) {
         setToast({text: "Ошибка при поиске по фото. Попробуйте еще раз.", type: "error"});
       } else {
         setToast({text: result.payload, type: "success"});
-        setFile(undefined);
+        setResult(createResultByRaw(result));
+        handleOpenResultModal();
       }
     } catch (err) {
       console.log(err);
@@ -73,9 +79,9 @@ const Index: React.FC<Props> = ({children}) => {
     setFile(undefined);
   }
 
-  // useEffect(()=> {
-  //   handleOpenResultModal();
-  // }, [])
+  useEffect(() => {
+    handleOpenResultModal();
+  }, [])
 
   return (
     <PageLayout>
@@ -122,7 +128,7 @@ const Index: React.FC<Props> = ({children}) => {
       </PageContent>
 
       <TrainingModal open={searchModal} onClose={handleCloseSearchModal}/>
-      <ResultModal open={resultModal} onClose={handleCloseResultModal} result={defaultResult}/>
+      {result && <ResultModal open={resultModal} onClose={handleCloseResultModal} result={result}/>}
 
       <style jsx>{`
         .dropzone {

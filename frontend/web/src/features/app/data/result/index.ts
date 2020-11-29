@@ -1,3 +1,9 @@
+export interface AdviceItem {
+  id: string;
+  name: string;
+  percent: string
+}
+
 export interface Result {
   fio: string;
   position: string;
@@ -7,6 +13,7 @@ export interface Result {
   inn?: string;
   fssp?: string;
   bankrot?: string;
+  advices: AdviceItem[]
 }
 
 export const labelByResult = (key: keyof Result): string => {
@@ -26,6 +33,10 @@ export const labelByResult = (key: keyof Result): string => {
   }
 }
 
+export const createResultByRaw = (obj: any): Result => {
+  return defaultResult
+}
+
 export const defaultResult = {
   fio: "Варламов Илья Александрович",
   position: "журналист, путешественник, блогер",
@@ -35,5 +46,12 @@ export const defaultResult = {
   inn: "dfdfdf",
   fssp: "dfdfdf",
   bankrot: "dfdfdf",
+  advices: [
+    {
+      id: "1",
+      name: "Услуга Ипотека",
+      percent: "60%"
+    }
+  ]
 
 } as Result;

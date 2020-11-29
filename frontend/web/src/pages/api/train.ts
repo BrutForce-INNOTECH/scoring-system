@@ -2,6 +2,7 @@ import {NextApiRequest, NextApiResponse} from 'next';
 import {apiClient} from "./_constants";
 
 // https://vk.com/durov
+// test = https://vk.com/friomusic
 const COUNT = 10;
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {

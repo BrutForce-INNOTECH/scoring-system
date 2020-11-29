@@ -15,7 +15,7 @@ const fetchTrain = (formValues: any) => ({
 
 const TrainingModal: React.FC<Props> = ({open, onClose}) => {
 
-  const [value, setValue] = useState("https://vk.com/durov");
+  const [value, setValue] = useState("https://vk.com/friomusic");
   const [count, setCount] = useState("10");
   const [toasts, setToast] = useToasts();
   const {loading, payload, mutate, error, reset, abort} = useMutation(fetchTrain as any);
@@ -38,9 +38,9 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
     const inputs = value.split("\n").filter(x => x);
     const result = await mutate({urls: inputs, count: _count});
     if (result.error) {
-      setToast({text: "Ошибка при загрузке данных. Попробуйте еще раз.", type: "error"});
+      setToast({text: "Ошибка при загрузке ссылок. Попробуйте еще раз.", type: "error"});
     } else {
-      setToast({text: "Данные успешно отправлены на проверку. Можно искать по фото!", type: "success"});
+      setToast({text: "Ссылки успешно отправлены. Можем искать финансовый профиль по фото!", type: "success"});
       setValue("");
       onClose();
     }
