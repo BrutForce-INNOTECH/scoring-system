@@ -213,7 +213,7 @@ const Index: React.FC<Props> = ({}) => {
         }
         .s_settings {
           position: fixed;
-          right: 16px;
+          left: 16px;
           bottom: 16px;
         }
       `}</style>
