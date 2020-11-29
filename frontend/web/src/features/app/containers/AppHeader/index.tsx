@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, Link, Text} from "@geist-ui/react";
+import {Button, Link, Spacer, Text} from "@geist-ui/react";
 import {APP_HOME_ROUTE} from "@common/routes/app";
 import NextLink from "next/link";
 import GithubIcon from '@geist-ui/react-icons/github'
+import CoffeeIcon from '@geist-ui/react-icons/coffee'
 
 
 interface Props {
@@ -21,6 +22,9 @@ const AppHeader: React.FC<Props> = () => {
   const handleGithub = () => {
     if (window) window.open("https://github.com/BrutForce-INNOTECH/scoring-system", '_ blank');
   }
+  const handleRecom = () => {
+    if (window) window.open("https://docs.google.com/document/d/1ZrVF1MYtpUCfFrrbusWM1GW5PMybiNOsh8IxZxRbVEk/edit", '_ blank');
+  }
 
   return (
     <header className="h_header">
@@ -32,9 +36,14 @@ const AppHeader: React.FC<Props> = () => {
           </Link>
         </NextLink>
 
-        <div className={"h_action_grow"} />
+        <div className={"h_action_grow"}/>
+
         <Button onClick={handleGithub} type={"default"} icon={<GithubIcon/>} auto size="small">
           GitHub
+        </Button>
+        <Spacer x={0.5}/>
+        <Button onClick={handleRecom} type={"success-light"} icon={<CoffeeIcon/>} auto size="small">
+          Рекомендация продукта
         </Button>
       </div>
 

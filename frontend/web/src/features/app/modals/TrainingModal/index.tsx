@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Input, Modal, Spacer, Textarea, useToasts} from "@geist-ui/react";
 import {useMutation} from "react-fetching-library";
+import {makeErrorToast, makeSuccessToast} from "@common/utils";
 
 interface Props {
   open: boolean
@@ -31,16 +32,17 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
   const handleSubmit = async (e: any) => {
     const _count = +count;
     if (_count < 3 || _count > 20) {
-      setToast({text: "Кол-во вхождений должно быть от 3 до 20.", type: "error"});
+      setToast(makeErrorToast("Кол-во фотографий должно быть от 3 до 20."));
       return;
     }
 
     const inputs = value.split("\n").filter(x => x);
     const result = await mutate({urls: inputs, count: _count});
+    console.log(result);
     if (result.error) {
-      setToast({text: "Ошибка при загрузке ссылок. Попробуйте еще раз.", type: "error"});
+      setToast(makeErrorToast("Ошибка при загрузке ссылок. Попробуйте еще раз."));
     } else {
-      setToast({text: "Ссылки успешно отправлены. Можем искать финансовый профиль по фото!", type: "success"});
+      setToast(makeSuccessToast("Ссылки успешно отправлены. Можем искать финансовый профиль по фото!"));
       setValue("");
       onClose();
     }
@@ -62,7 +64,7 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
         />
         <Spacer y={0.5}/>
         <Input
-          label="Кол-во вхождений"
+          label="Кол-во фотографий"
           min={3}
           max={20}
           disabled={loading}

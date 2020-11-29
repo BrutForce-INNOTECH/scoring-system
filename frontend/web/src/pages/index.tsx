@@ -1,14 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Button, Card, Spacer, Text, useToasts} from "@geist-ui/react";
 import PageLayout from "@app/layouts/PageLayout";
 import PageContent from "@app/containers/PageContent";
 import Dropzone from 'react-dropzone'
 import clsx from "clsx"
 import fileClient from "@common/api/fileClient";
-import {useMutation} from "react-fetching-library";
+import {QueryResponse, useMutation} from "react-fetching-library";
 import TrainingModal from "../features/app/modals/TrainingModal";
 import ResultModal from "../features/app/modals/ResultModal";
 import {createResultByRaw, Result} from "@app/data/result";
+import {makeErrorToast} from "@common/utils";
 
 interface Props {
 }
@@ -16,6 +17,12 @@ interface Props {
 const fetchSearch = (formValues: any) => ({
   method: 'POST',
   endpoint: '/search',
+  body: formValues,
+});
+
+const fetchResult = (formValues: any) => ({
+  method: 'POST',
+  endpoint: '/get_info',
   body: formValues,
 });
 
@@ -32,14 +39,17 @@ const Index: React.FC<Props> = ({children}) => {
   const [toasts, setToast] = useToasts();
   const [searchModal, setSearchModal] = useState(false);
   const [resultModal, setResultModal] = useState(false);
-  const {payload, mutate, error} = useMutation(fetchSearch as any);
+  const {mutate: searchMutate} = useMutation(fetchSearch as any);
+  const {mutate: resultMutate} = useMutation(fetchResult as any);
 
   const handleOpenSearchModal = () => setSearchModal(true)
   const handleCloseSearchModal = () => setSearchModal(false)
-  const handleOpenResultModal = () => setResultModal(true);
+  const handleOpenResultModal = (newResult: Result) => {
+    setResult(newResult);
+    setResultModal(true);
+  };
   const handleCloseResultModal = () => {
     setResultModal(false);
-    setResult(undefined);
   }
 
   const handleDrop = useCallback(acceptedFiles => {
@@ -54,22 +64,22 @@ const Index: React.FC<Props> = ({children}) => {
     if (!file) return;
     try {
       setLoading(true);
+      setResult(undefined);
 
       const uploadResult = await fileClient.uploadFile(file.blob);
-      const result = await mutate({
+      const searchResult: QueryResponse = await searchMutate({
         thresh: 0.65,
         url: uploadResult,
       });
-      if (result.error) {
-        setToast({text: "Ошибка при поиске по фото. Попробуйте еще раз.", type: "error"});
+      if (searchResult.error) {
+        setToast(makeErrorToast("Ошибка при поиске по фото. Попробуйте еще раз."));
       } else {
-        setToast({text: result.payload, type: "success"});
-        setResult(createResultByRaw(result));
-        handleOpenResultModal();
+        console.log(searchResult.payload);
+        const fetchResult = await resultMutate({id: searchResult.payload.data.id});
+        handleOpenResultModal(createResultByRaw(fetchResult));
       }
     } catch (err) {
-      console.log(err);
-      setToast({text: err.message, type: "error"});
+      setToast(makeErrorToast(err.message));
     } finally {
       setLoading(false);
     }
@@ -77,17 +87,14 @@ const Index: React.FC<Props> = ({children}) => {
 
   const handleRemoveFile = () => {
     setFile(undefined);
+    setResult(undefined);
   }
-
-  useEffect(() => {
-    handleOpenResultModal();
-  }, [])
 
   return (
     <PageLayout>
       <Text h1 size={"1.6rem"} type={"secondary"}>Определить финансовый профиль по фото</Text>
       <PageContent>
-        <Card shadow>
+        <Card>
           <form onSubmit={handleSubmit}>
             <Dropzone onDrop={handleDrop} disabled={!!file}>
               {({getRootProps, getInputProps, isDragActive}) => (
