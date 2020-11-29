@@ -8,6 +8,7 @@ import {ClientContextProvider} from 'react-fetching-library';
 import client from "@common/api/client";
 import {useRouter} from "next/router";
 import gtag from "@common/ga/gtag";
+import {serverSideUtils} from "@common/utils/serverSideUtils";
 
 interface CustomAppProps extends AppProps {
   cacheItems?: any
@@ -17,7 +18,7 @@ const CustomApp: React.FC<CustomAppProps> = ({Component, cacheItems, pageProps})
 
   const {pathname} = useRouter();
   useEffect(()=> {
-    gtag.pageView(pathname);
+    serverSideUtils.isProduction() && gtag.pageView(pathname);
   }, [pathname])
 
   useEffect(() => {
