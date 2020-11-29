@@ -75,7 +75,7 @@
 - Для определения услуг, подходящих пользователю, нажимаем на всплывающем окне с информацией **Подобрать Услуги**.
 
 <p align="center">
-<img src="./readme_asserts/gif2.gif" width="80%"></p>
+<img src="./readme_asserts/gif5.gif" width="80%"></p>
 
 
 <a name="о_проекте_и_технологиях"></a> 
@@ -84,6 +84,9 @@
 
 <a name="архитектура"></a> 
 ### Архитектура
+
+<p align="center">
+<img src="./readme_asserts/sheme.png" width="60%"></p> 
 
 **Используемые API**:
 - [ВК](https://vk.com/dev/methods)
