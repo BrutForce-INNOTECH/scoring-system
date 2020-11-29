@@ -70,7 +70,7 @@ const TrainingModal: React.FC<Props> = ({open, onClose}) => {
           disabled={loading}
           value={count}
           width={"100%"}
-          type={"numeric"}
+          type={"number"}
           onChange={changeCount}
         />
       </Modal.Content>

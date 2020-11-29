@@ -8,8 +8,13 @@ import fileClient from "@common/api/fileClient";
 import {QueryResponse, useMutation} from "react-fetching-library";
 import TrainingModal from "../features/app/modals/TrainingModal";
 import ResultModal from "../features/app/modals/ResultModal";
-import {createResultByRaw, defaultResult, Result} from "@app/data/result";
+import {createResultByRaw, Result} from "@app/data/result";
 import {makeErrorToast} from "@common/utils";
+import SettingsIcon from '@geist-ui/react-icons/settings'
+import SettingsModal from "../features/app/modals/SettingsModal";
+import useLocalStorage from "@common/hooks/useLocalStorage";
+import {SETTINGS_THRESH_KEY, Settings} from "@app/data/settings";
+
 
 interface Props {
 }
@@ -31,19 +36,26 @@ interface FileItem {
   blob: File
 }
 
-const Index: React.FC<Props> = ({children}) => {
+const Index: React.FC<Props> = ({}) => {
 
+  const [localSettings, setLocalSettings] = useLocalStorage(SETTINGS_THRESH_KEY, undefined);
+  const [settings, setSettings] = useState<Settings>({thresh: 0.65} as Settings);
   const [result, setResult] = useState<Result>();
   const [file, setFile] = useState<FileItem>();
   const [loading, setLoading] = useState(false);
   const [toasts, setToast] = useToasts();
   const [searchModal, setSearchModal] = useState(false);
+  const [settingsModal, setSettingsModal] = useState(false);
   const [resultModal, setResultModal] = useState(false);
   const {mutate: searchMutate} = useMutation(fetchSearch as any);
   const {mutate: resultMutate} = useMutation(fetchResult as any);
 
   const handleOpenSearchModal = () => setSearchModal(true)
   const handleCloseSearchModal = () => setSearchModal(false)
+
+  const handleOpenSettingsModal = () => setSettingsModal(true)
+  const handleCloseSettingsModal = () => setSettingsModal(false)
+
   const handleOpenResultModal = (newResult: Result) => {
     setResult(newResult);
     setResultModal(true);
@@ -67,8 +79,9 @@ const Index: React.FC<Props> = ({children}) => {
       setResult(undefined);
 
       const uploadResult = await fileClient.uploadFile(file.blob);
+      console.log(settings);
       const searchResult: QueryResponse = await searchMutate({
-        thresh: 0.65,
+        thresh: settings.thresh,
         url: uploadResult,
       });
       if (searchResult.error) {
@@ -97,6 +110,20 @@ const Index: React.FC<Props> = ({children}) => {
     setResult(undefined);
   }
 
+  const handleChangeSettings = (newSettings: Settings) => {
+    setSettings(newSettings);
+    setLocalSettings(newSettings)
+  }
+
+  useEffect(() => {
+    if (localSettings) {
+      console.log(localSettings);
+      setSettings(localSettings)
+    } else {
+      setLocalSettings(settings)
+    }
+  }, []);
+
   // useEffect(() => {
   //   handleOpenResultModal(defaultResult);
   // }, [])
@@ -109,22 +136,22 @@ const Index: React.FC<Props> = ({children}) => {
           <form onSubmit={handleSubmit}>
             <Dropzone onDrop={handleDrop} disabled={!!file}>
               {({getRootProps, getInputProps, isDragActive}) => (
-                <div {...getRootProps()} className={clsx("dropzone", isDragActive && "dropzone_active")}>
+                <div {...getRootProps()} className={clsx("s_dropzone", isDragActive && "s_dropzone_active")}>
                   <input {...getInputProps()} />
                   {!file && <p>Перетащите фото или загрузите с компьютера</p>}
-                  {!!file && <img alt={"thumb"} className={"thumb"} src={file.preview!}/>}
+                  {!!file && <img alt={"thumb"} className={"s_thumb"} src={file.preview!}/>}
                 </div>
               )}
             </Dropzone>
             <Spacer y={0.75}/>
-            <div className={"actions"}>
+            <div className={"s_actions"}>
               <Button
                 onClick={handleOpenSearchModal}
                 disabled={loading}
                 type={"default"}>
                 Добавить ссылки
               </Button>
-              <div className={"grow_action"}/>
+              <div className={"s_grow_action"}/>
               {!!file && (
                 <>
                   <Spacer x={0.5}/>
@@ -141,15 +168,21 @@ const Index: React.FC<Props> = ({children}) => {
               </Button>
             </div>
           </form>
-
         </Card>
+
+        <div className={"s_settings"}>
+          <Button onClick={handleOpenSettingsModal} iconRight={<SettingsIcon/>} auto size="medium"/>
+        </div>
+
       </PageContent>
 
       <TrainingModal open={searchModal} onClose={handleCloseSearchModal}/>
+      <SettingsModal open={settingsModal} settings={settings} onChangeSettings={handleChangeSettings}
+                     onClose={handleCloseSettingsModal}/>
       {result && <ResultModal open={resultModal} onClose={handleCloseResultModal} result={result}/>}
 
       <style jsx>{`
-        .dropzone {
+        .s_dropzone {
           border: dashed #ccc 1px;
           border-radius: 8px;
           height: 360px;
@@ -160,21 +193,26 @@ const Index: React.FC<Props> = ({children}) => {
           justify-content: center;
           overflow: hidden;
         }
-        .dropzone_active {
+        .s_dropzone_active {
           background-color: #c8e6c9;
         }
-        .thumb {
+        .s_thumb {
           width: 100%;
           height: 100%;
           object-fit: contain;
         }
-        .actions {
+        .s_actions {
           display:flex;
           flex-direction: row;
           align-items: center;
         }
-        .grow_action {
+        .s_grow_action {
           flex-grow: 1;
+        }
+        .s_settings {
+          position: fixed;
+          right: 16px;
+          bottom: 16px;
         }
       `}</style>
     </PageLayout>
