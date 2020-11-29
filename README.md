@@ -146,10 +146,10 @@
 *Frontend*
 - [Typescript](https://www.typescriptlang.org/)
 - [Next.JS](https://nextjs.org/)
-- [React, React hooks](https://reactjs.org/)
+- [React.JS](https://reactjs.org/)
 
 *Backend*
-- [SSR](https://vuejs.org/v2/guide/ssr.html)
+- [SSR](https://nextjs.org/docs/basic-features/data-fetching)
 - [Nginx](https://nginx.org/)
 
 <a name="ui_ux_design"></a> 
