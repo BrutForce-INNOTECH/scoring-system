@@ -4,11 +4,13 @@
 
 <img src="https://img.shields.io/badge/made%20by-BrutForce-blue.svg" >
 
-<img src="https://img.shields.io/badge/react-17.0.0-green.svg">
-
-<img src="https://img.shields.io/badge/python-3.8.6-green.svg">
+<img src="https://img.shields.io/badge/react-version-green.svg">
 
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
+
+<img src="https://img.shields.io/github/stars/BrutForce-INNOTECH/наш.svg?style=flat">
+
+<img src="https://img.shields.io/github/issues/BrutForce-INNOTECH/наш.svg">
 
 </p>
 
@@ -84,4 +86,4 @@
 - Добавить 2
 - Добавить 3
 
-<img src=".readme_asserts/logo_comm.PNG" width="30%">
+<p align="center"><img src=".readme_asserts/logo_comm.png" width="30%"></p>
