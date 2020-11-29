@@ -27,9 +27,11 @@
  - [Frontend & Backend](#frontend_and_backend)
  - [UI/UX Design](#ui_ux_design)
  - [Рекомендательная система на основе Скорринга](#рекомендательная_система_на_основе_скорринга)
+-[Планы на будущее](#планы_на_будущее)
  
-## Описание
+
 <a name="описание"></a> 
+## Описание
 
 **Как работает система**
 
@@ -41,6 +43,7 @@
 
 **Над созданием проекта работают [Виктор](https://github.com/victor30608), [Алексей](https://github.com/kvandake), [Анна](https://github.com/elladiell), [Сергей](https://github.com/itboss2), [Кристина](https://www.behance.net/kmazanova6b1e)** .
 
+<a name="как_пользоваться_системой"></a> 
 ## Как пользоваться системой
 
 **Для ускорения работы с системой следует нажать на шестеренку в правом нижнем углу экранна и уменьшить значение.**
@@ -65,38 +68,49 @@
 <p align="center">
 <img src="./readme_asserts/gif2.gif" width="80%"></p>
 
+
+<a name="о_проекте_и_технологиях"></a> 
 ## О проекте и технологиях.
 
+
+<a name="архитектура"></a> 
 ### Архитектура
 
 **Используемые API**:
-[ВК](https://vk.com/dev/methods)
-[Судебное производство от ФССП](https://api-ip.fssprus.ru/)
+- [ВК](https://vk.com/dev/methods)
+- [Судебное производство от ФССП](https://api-ip.fssprus.ru/)
 
+<a name="computer_vision_and_machine_learning"></a> 
 ### Computer Vision & Machine Learning
 
 Описание и важные вырезки кода технологии.
 Возможно, картинки или графики.
 
+<a name="frontend_and_backend"></a> 
 ### Frontend & Backend
+*Frontend*
+- [Typescript](https://www.typescriptlang.org/)
+- [Next.JS](https://nextjs.org/)
+- [React, React hooks](https://reactjs.org/)
 
+*Backend*
+- [SSR](https://vuejs.org/v2/guide/ssr.html)
+- [Nginx](https://nginx.org/)
 
-Описание и важные вырезки кода технологии.
-Возможно, картинки или графики.
-
-  <p align="center"><img  src="./readme_assets/4.png" width="30%"></p>
-
+<a name="ux_ui_design"></a> 
 ### UI/UX Design
 
 Описание и важные детали разработки
 Возможно, картинки или графики.
 
+<a name="рекомендательная_система_на_основе_скорринга"></a> 
 ### Рекомендательная система на основе Скорринга
 
 Описание и важные вырезки кода технологии.
 Возможно, картинки или графики.
 
 
+<a name="планы_на_будущее"></a> 
 ## Планы на будущее
 
 - Добавить 1
