@@ -16,10 +16,10 @@ const ResultContainer: React.FC<Props> = ({result}) => {
       <div className={"r_tabs_container"}>
         <Tabs initialValue="1">
           <Tabs.Item label="Финансовая информация" value="1"><ResultDetail result={result}/></Tabs.Item>
-          {result.BDIP?.BDIP && result.BDIP.BDIP.length > 0 &&
-          <Tabs.Item label="Судебное производство от ФССП" value="2"><ResultBdip BDIP={result.BDIP.BDIP}/></Tabs.Item>}
           {result.score &&
-          <Tabs.Item label="Рекомендуемые услуги" value="3"><ResultRecommend result={result} score={result.score}/></Tabs.Item>}
+          <Tabs.Item label="Рекомендуемые продукты" value="2"><ResultRecommend result={result} score={result.score}/></Tabs.Item>}
+          {result.BDIP?.BDIP && result.BDIP.BDIP.length > 0 &&
+          <Tabs.Item label="Судебное производство от ФССП" value="3"><ResultBdip BDIP={result.BDIP.BDIP}/></Tabs.Item>}
         </Tabs>
       </div>
 
