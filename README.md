@@ -86,4 +86,4 @@
 - Добавить 2
 - Добавить 3
 
-<p><img src="./readme_asserts/logo_comm.png" width="30%"></p>
+<p align="right" ><img src="./readme_asserts/logo_comm.png" width="15%"></p>
