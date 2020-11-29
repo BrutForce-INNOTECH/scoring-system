@@ -88,15 +88,19 @@ export interface Person {
   universities: ResultUniversity[];
   schools: any[];
   relatives: ResultRelative[];
+}
 
-
+export interface Bdip {
+  name: string
+  details: string
+  subject: string
 }
 
 export interface Result {
   age?: number;
   score?: number;
   data: Person
-  BDIP?: any;
+  BDIP?: { BDIP: Bdip[] };
   advices?: any[]
 }
 
