@@ -11,10 +11,10 @@ class Document extends NextDocument {
         <Head>
           {serverSideUtils.isProduction() && (
             <>
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}/>
               <script async
-                dangerouslySetInnerHTML={{
-                  __html: `
+                      dangerouslySetInnerHTML={{
+                        __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
@@ -22,7 +22,7 @@ class Document extends NextDocument {
                     page_path: window.location.pathname,
                   });
                 `,
-                }}
+                      }}
               />
             </>
           )}

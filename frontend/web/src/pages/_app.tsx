@@ -17,7 +17,7 @@ interface CustomAppProps extends AppProps {
 const CustomApp: React.FC<CustomAppProps> = ({Component, cacheItems, pageProps}) => {
 
   const {pathname} = useRouter();
-  useEffect(()=> {
+  useEffect(() => {
     serverSideUtils.isProduction() && gtag.pageView(pathname);
   }, [pathname])
 
@@ -31,7 +31,7 @@ const CustomApp: React.FC<CustomAppProps> = ({Component, cacheItems, pageProps})
         <title>Команда BrutForce INNOTECH HACK</title>
       </Head>
 
-      <ClientContextProvider client={client}>
+     <ClientContextProvider client={client}>
         <GeistProvider>
           <CssBaseline/>
           <AppLayout>
