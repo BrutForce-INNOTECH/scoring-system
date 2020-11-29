@@ -39,7 +39,7 @@ interface FileItem {
 const Index: React.FC<Props> = ({}) => {
 
   const [localSettings, setLocalSettings] = useLocalStorage(SETTINGS_THRESH_KEY, undefined);
-  const [settings, setSettings] = useState<Settings>({thresh: 0.65} as Settings);
+  const [settings, setSettings] = useState<Settings>({thresh: 0.4} as Settings);
   const [result, setResult] = useState<Result>();
   const [file, setFile] = useState<FileItem>();
   const [loading, setLoading] = useState(false);
