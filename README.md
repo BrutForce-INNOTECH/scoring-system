@@ -26,11 +26,11 @@
 - [Описание](#описание)
 - [Как пользоваться системой](#как_пользоваться_системой)
 - [О проекте и технологиях](#о_проекте_и_технологиях)
- - [Архитектура](#архитектура)
- - [Computer Vision & Machine Learning](#computer_vision_and_machine_learning)
- - [Frontend & Backend](#frontend_and_backend)
- - [UI/UX Design](#ui_ux_design)
- - [Рекомендательная система на основе Скорринга](#рекомендательная_система_на_основе_скорринга)
+  - [Архитектура](#архитектура)
+  - [Computer Vision & Machine Learning](#computer_vision_and_machine_learning)
+  - [Frontend & Backend](#frontend_and_backend)
+  - [UI/UX Design](#ui_ux_design)
+  - [Рекомендательная система на основе Скорринга](#рекомендательная_система_на_основе_скорринга)
 - [Планы на будущее](#планы_на_будущее)
  
 
